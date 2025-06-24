@@ -1,21 +1,28 @@
 import { type Guitar } from "../data/db";
-import { useMemo } from "react";
+
 
 export const Header = ({
     cart,
     handleAddToCart,
     handleRemoveFromCart,
-    handleDeleteFromCart
+    handleDeleteFromCart,
+    handleClearCart,
+    isEmpty,
+    cartTotal,
+    
 }: {
     cart: Guitar[];
     handleAddToCart: (guitar: Guitar) => void;
     handleRemoveFromCart: (guitar: Guitar) => void;
     handleDeleteFromCart: (guitar: Guitar) => void;
+    handleClearCart: () => void;
+    isEmpty: boolean;
+    cartTotal: number;
+    
 }) => {
 
 
-    const isEmpty = useMemo(()=> cart.map(guitar=> guitar).length===0, [cart]) // useMemo para que no se renderice cada vez que se actualice el carrito para eliminar el costo de renderizar toda la app completa
-    const cartTotal = useMemo (()=> cart.map(guitar => guitar.price * guitar.quantity).reduce((total, price)=> total + price, 0), [cart])
+    
     return (
         <header className="py-5 header">
             <div className="container-xl">
@@ -90,7 +97,15 @@ export const Header = ({
                                         <p className="text-end">Total pagar: <span className="fw-bold">
                                             ${cartTotal}
                                         </span></p>
+                                        <button
+                                        className="btn btn-dark w-100"
+                                        type="button"
+                                        onClick ={()=>handleClearCart()}
+                                    >
+                                        Vaciar Carrito
+                                    </button>
                                     </>
+                                   
                                 )}
                             </div>
                         </div>
