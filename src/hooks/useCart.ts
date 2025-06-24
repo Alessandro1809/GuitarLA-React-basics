@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react"
-import { db, type Guitar } from "../data/db"
+import { db } from "../data/db"
+import { type Guitar } from "../types/types"
 
 export const useCart = () => {
 
@@ -9,11 +10,11 @@ export const useCart = () => {
     const [cart, setCart] = useState<Guitar[]>([]);
 
     useEffect(() => {
-        const cartFromStorage = Object.values(localStorage).map(item => JSON.parse(item));
+        const cartFromStorage : Guitar[] = Object.values(localStorage).map(item => JSON.parse(item));
         setCart(cartFromStorage);
     }, []);
 
-    const handleAddToCart = (guitar: Guitar) => {
+    const handleAddToCart: (guitar: Guitar) => void = (guitar: Guitar) => {
         const guitarInCart = localStorage.getItem(guitar.id.toString());
         if (guitarInCart) {
             const updatedGuitar = JSON.parse(guitarInCart);
@@ -29,7 +30,7 @@ export const useCart = () => {
         }
     }
 
-    const handleRemoveFromCart = (guitar: Guitar) => {
+    const handleRemoveFromCart: (guitar: Guitar) => void = (guitar: Guitar) => {
         const guitarInCart = localStorage.getItem(guitar.id.toString());
         if (guitarInCart) {
             const updatedGuitar = JSON.parse(guitarInCart);
@@ -43,12 +44,12 @@ export const useCart = () => {
         }
     }
 
-    const handleDeleteFromCart = (guitar: Guitar) => {
+    const handleDeleteFromCart : (guitar: Guitar) => void = (guitar: Guitar) => {
         localStorage.removeItem(guitar.id.toString());
         setCart(Object.values(localStorage).map(item => JSON.parse(item)));
     }
 
-    const handleClearCart = () => {
+    const handleClearCart : () => void = () => {
         localStorage.clear();
         setCart([]);
     }

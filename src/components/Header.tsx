@@ -1,4 +1,4 @@
-import { type Guitar } from "../data/db";
+import { type Guitar } from "../types/types";
 
 
 export const Header = ({

@@ -1,5 +1,15 @@
-import { type Guitar } from "../data/db"
+import { type Guitar } from "../types/types"
 
+export interface GuitarProps {
+  guitar: Guitar;
+  addToCart: (guitar: Guitar) => void;
+  handleAddToCart: (guitar: Guitar) => void;
+  handleRemoveFromCart: (guitar: Guitar) => void;
+  handleDeleteFromCart: (guitar: Guitar) => void;
+  handleClearCart: () => void;
+  isEmpty: boolean;
+  cartTotal: number;
+}
 
 export const GuitarCard = ({guitarDetails,addToCart}:{guitarDetails:Guitar,addToCart:(guitar:Guitar) => void}) => {
 
